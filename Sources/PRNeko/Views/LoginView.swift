@@ -11,7 +11,7 @@ struct LoginView: View {
                 .foregroundColor(.orange)
                 .padding(.top, 40)
 
-            Text("GitHub Pet")
+            Text("PRNeko")
                 .font(.title)
                 .fontWeight(.bold)
 
