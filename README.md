@@ -18,8 +18,7 @@ A cute menu bar companion that monitors your GitHub pull requests. Your PR statu
 - **Auto-refresh** - Polls GitHub every 3 minutes
 
 ## Screenshot
-
-<!-- Add screenshot here -->
+![alt text](image.png)
 
 ## Run
 
