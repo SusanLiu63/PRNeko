@@ -1,0 +1,38 @@
+# Swift Package Manager
+.build/
+.swiftpm/
+Package.resolved
+
+# Xcode
+*.xcodeproj/
+*.xcworkspace/
+xcuserdata/
+DerivedData/
+*.xcuserstate
+
+# macOS
+.DS_Store
+*.dSYM.zip
+*.dSYM
+
+# App bundles (built artifacts)
+*.app/
+*.zip
+
+# Claude Code settings (may contain API keys)
+.claude/
+
+# Environment files
+.env
+.env.*
+*.local
+
+# Python cache (from your gif script)
+__pycache__/
+*.pyc
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
