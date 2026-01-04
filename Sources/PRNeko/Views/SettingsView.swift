@@ -14,12 +14,11 @@ struct SettingsView: View {
                 // Preferences section
                 preferencesSection
 
-                #if DEBUG
-                Divider()
-
-                // Debug section
-                debugSection
-                #endif
+                // Debug section (only when PRNEKO_MOCK=1)
+                if viewModel.mockMode {
+                    Divider()
+                    debugSection
+                }
             }
             .padding(.horizontal, 12)
             .padding(.vertical, 8)
@@ -98,8 +97,7 @@ struct SettingsView: View {
         }
     }
 
-    #if DEBUG
-    // MARK: - Debug Section
+    // MARK: - Debug Section (only visible when PRNEKO_MOCK=1)
 
     private var debugSection: some View {
         VStack(alignment: .leading, spacing: 8) {
@@ -112,20 +110,6 @@ struct SettingsView: View {
             .foregroundColor(.secondary)
 
             VStack(alignment: .leading, spacing: 8) {
-                VStack(alignment: .leading, spacing: 4) {
-                    Toggle("Mock Mode", isOn: Binding(
-                        get: { viewModel.mockMode },
-                        set: { _ in viewModel.toggleMockMode() }
-                    ))
-                    .toggleStyle(.switch)
-                    .controlSize(.small)
-                    .font(.system(size: 11))
-
-                    Text("Use mock data instead of GitHub API")
-                        .font(.system(size: 10))
-                        .foregroundColor(.secondary)
-                }
-
                 HStack(spacing: 8) {
                     Button("Clear Blocked") {
                         viewModel.clearBlocked()
@@ -154,5 +138,4 @@ struct SettingsView: View {
             .cornerRadius(6)
         }
     }
-    #endif
 }

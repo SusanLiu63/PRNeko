@@ -2,7 +2,6 @@ import SwiftUI
 
 struct PopoverContentView: View {
     @ObservedObject var viewModel: AppViewModel
-    @State private var showDebugMenu = false
     @State private var showSettings = false
 
     var body: some View {
@@ -100,20 +99,16 @@ struct PopoverContentView: View {
 
             Spacer()
 
-            #if DEBUG
-            // Mock mode toggle (for testing)
+            // Mock indicator (when PRNEKO_MOCK=1)
             if viewModel.mockMode {
-                Toggle(isOn: $viewModel.mockMode) {
-                    HStack(spacing: 4) {
-                        Image(systemName: "testtube.2")
-                            .font(.system(size: 10))
-                        Text("Mock")
-                            .font(.system(size: 11))
-                    }
+                HStack(spacing: 4) {
+                    Image(systemName: "testtube.2")
+                        .font(.system(size: 10))
+                    Text("Mock")
+                        .font(.system(size: 11))
                 }
-                .toggleStyle(.checkbox)
+                .foregroundColor(.orange)
             }
-            #endif
 
             // Error indicator
             if let error = viewModel.lastGitHubError {

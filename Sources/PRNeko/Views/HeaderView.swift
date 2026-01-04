@@ -134,11 +134,14 @@ struct HeaderView: View {
 
         // Try Bundle resources first (for .app distribution), then fall back to dev path
         let basePath: String
-        if let resourcePath = Bundle.main.resourcePath {
-            basePath = resourcePath
+        let bundlePath = Bundle.main.resourcePath ?? ""
+        let bundleGifPath = "\(bundlePath)/\(fileName).gif"
+
+        if FileManager.default.fileExists(atPath: bundleGifPath) {
+            basePath = bundlePath
         } else {
-            // Fallback for development
-            basePath = NSString(string: "~/Documents/petDesktop/asset").expandingTildeInPath
+            // Fallback for development - relative to working directory
+            basePath = "Sources/PRNeko/Assets"
         }
 
         if state.isAnimated {

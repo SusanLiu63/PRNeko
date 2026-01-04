@@ -17,47 +17,22 @@ A cute menu bar companion that monitors your GitHub pull requests. Your PR statu
 - **GitHub OAuth** - Secure device flow authentication
 - **Auto-refresh** - Polls GitHub every 3 minutes
 
-## Installation
+## Screenshot
 
-### Build from source
+<!-- Add screenshot here -->
 
-```bash
-git clone https://github.com/yourusername/PRNeko.git
-cd PRNeko
-swift build
-```
-
-### Create .app bundle
+## Run
 
 ```bash
-./scripts/build-release.sh
-open PRNeko.app
+swift build && .build/arm64-apple-macosx/debug/PRNeko
 ```
 
-## Usage
-
-1. Click the paw icon in your menu bar
-2. Log in with GitHub (uses secure device flow)
-3. Your PRs will appear organized by status:
-   - **Pending Reviews** - PRs waiting for your review
-   - **Waiting for Review** - Your PRs awaiting review from others
-   - **Merge Ready** - Approved and ready to merge
-   - **Blocked** - PRs with failing checks or requested changes
+Click the paw icon in your menu bar and log in with GitHub.
 
 ## Requirements
 
-- macOS 13.0 or later
+- macOS 13.0+
 - GitHub account
-
-## Development
-
-```bash
-# Build and run
-swift build && .build/debug/PRNeko
-
-# Build release
-swift build -c release
-```
 
 ## License
 

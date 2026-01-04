@@ -33,9 +33,7 @@ class AppViewModel: ObservableObject {
     private let pollingInterval: UInt64 = 180 // 3 minutes in seconds
 
     // MARK: - Settings
-    @Published var mockMode: Bool {
-        didSet { UserDefaults.standard.set(mockMode, forKey: "settings.mockMode") }
-    }
+    @Published var mockMode: Bool
     @Published var quietHours: Bool {
         didSet { UserDefaults.standard.set(quietHours, forKey: "settings.quietHours") }
     }
@@ -63,12 +61,9 @@ class AppViewModel: ObservableObject {
 
     // MARK: - Initialization
     init() {
-        #if DEBUG
-        let mockModeDefault = true
-        #else
-        let mockModeDefault = false
-        #endif
-        self.mockMode = UserDefaults.standard.object(forKey: "settings.mockMode") as? Bool ?? mockModeDefault
+        // Enable mock mode with: PRNEKO_MOCK=1 .build/arm64-apple-macosx/debug/PRNeko
+        let mockModeFromEnv = ProcessInfo.processInfo.environment["PRNEKO_MOCK"] == "1"
+        self.mockMode = mockModeFromEnv
         self.quietHours = UserDefaults.standard.bool(forKey: "settings.quietHours")
 
         // Check for stored credentials
@@ -116,13 +111,8 @@ class AppViewModel: ObservableObject {
 
     func resetAll() {
         quietHours = false
-        #if DEBUG
-        mockMode = true
-        loadMockData()
-        #else
         mockMode = false
         clearQueues()
-        #endif
     }
 
     func toggleMockMode() {
