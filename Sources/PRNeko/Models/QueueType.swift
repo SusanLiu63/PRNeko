@@ -18,10 +18,7 @@ enum QueueType: String, CaseIterable, Identifiable {
     }
 
     var subtitle: String? {
-        switch self {
-        case .mergeReady: return "Likely"
-        default: return nil
-        }
+        return nil
     }
 
     var iconName: String {

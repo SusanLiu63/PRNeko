@@ -78,12 +78,29 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
         let count = viewModel.totalActionableItems
 
-        // SF Symbol icon
-        if let image = NSImage(systemSymbolName: "pawprint.fill", accessibilityDescription: "Pet") {
+        // Configure button layout
+        button.imagePosition = .imageLeading
+
+        // SF Symbol icon with proper size for menu bar
+        let config = NSImage.SymbolConfiguration(pointSize: 14, weight: .medium)
+        if let image = NSImage(systemSymbolName: "pawprint.fill", accessibilityDescription: "PRNeko")?.withSymbolConfiguration(config) {
             image.isTemplate = true
             button.image = image
         }
-        button.title = count > 0 ? " \(count)" : ""
+
+        // Show count directly next to icon (no extra spacing)
+        if count > 0 {
+            let attributed = NSAttributedString(
+                string: "\(count)",
+                attributes: [
+                    .font: NSFont.monospacedDigitSystemFont(ofSize: 13, weight: .medium),
+                    .baselineOffset: 0.5
+                ]
+            )
+            button.attributedTitle = attributed
+        } else {
+            button.title = ""
+        }
     }
 
     @objc private func togglePopover() {
